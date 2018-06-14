@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/notification_online_container"
+        android:weightSum="3">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_request_button"
+            android:text="@string/notification_request_button_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_connect_button"
+            android:text="@string/notification_connect_button_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:visibility="gone"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_client_stop_button"
+            android:text="@string/notification_disconnect_button_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_switch_to_offline_button"
+            android:text="@string/notification_switch_to_offline_button_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/notification_offline_container"
+        android:weightSum="3">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_record_button"
+            android:text="@string/notification_record_button_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_stop_button"
+            android:text="@string/notification_stop_button_text"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_play_button"
+            android:text="@string/notification_play_button_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/notification_switch_to_online_button"
+            android:text="@string/notification_switch_to_online_button_text"/>
+
+    </LinearLayout>
+
+</LinearLayout>

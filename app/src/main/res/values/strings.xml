@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_body_text">Helper Buttons</string>
+    <string name="notification_request_button_text">Request</string>
+    <string name="notification_connect_button_text">Connect</string>
+    <string name="notification_disconnect_button_text">Disconnect</string>
+    <string name="notification_switch_to_online_button_text">Switch To Online</string>
+    <string name="notification_switch_to_offline_button_text">Switch To OffLine</string>
+    <string name="notification_play_button_text">Play</string>
+    <string name="notification_record_button_text">Record</string>
+    <string name="notification_stop_button_text">Stop</string>
+    <string name="dialog_server_ip_hint">Enter Server IP</string>
+    <string name="dialog_request_title">Requesting Help</string>
+    <string name="dialog_request_message">Server Started at&#160;</string>
+    <string name="dialog_connect_title">Connect To Server</string>
+</resources>
