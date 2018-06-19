@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.ListView;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
 import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.PlayerRunnable;
@@ -45,17 +45,9 @@ public class Utils {
 
     private static int notificationDisplayCount = 0;
 
+    private static int currentViewPagerId;
+
     private static WeakReference<Activity> currentActivity;
-
-    private static Menu currentMenu;
-
-    public static Menu getCurrentMenu() {
-        return currentMenu;
-    }
-
-    public static void setCurrentMenu(Menu currentMenu) {
-        Utils.currentMenu = currentMenu;
-    }
 
     public static Activity getCurrentActivity() {
         return currentActivity.get();
@@ -63,6 +55,14 @@ public class Utils {
 
     public static void setCurrentActivity(Activity activity) {
         currentActivity = new WeakReference<>(activity);
+    }
+
+    public static int getCurrentViewPagerId() {
+        return currentViewPagerId;
+    }
+
+    public static void setCurrentViewPagerId(int viewPagerId) {
+        currentViewPagerId = viewPagerId;
     }
 
     public static void setRecordingState(boolean recordingState) {
@@ -78,7 +78,7 @@ public class Utils {
     }
 
     public static void toggleRecordingMode() {
-         recordingMode = 1 - recordingMode;
+        recordingMode = 1 - recordingMode;
     }
 
     public static boolean isRootTagStarted() {
@@ -186,51 +186,28 @@ public class Utils {
         return getParentRecyclerItemViewRec(parent);
     }
 
-/*    public static View getViewFromParentListView(String curViewId, String parentListViewId, Activity recorderActivity, int listViewItemId) {
-        View parent = recorderActivity.findViewById(Utils.getViewIdIntFromString(parentListViewId, recorderActivity));
-        ListView listView = parent instanceof ListView ? (ListView)parent : null;
-        RecyclerView recyclerView = parent instanceof RecyclerView ? (RecyclerView)parent : null;
-        View listItem;
-
-        if (listView != null) {
-            listView.smoothScrollToPosition(listViewItemId);
-            listItem = Utils.getViewFromListViewByPosition(listViewItemId, listView);
-        } else if (recyclerView != null){
-            recyclerView.smoothScrollToPosition(listViewItemId);
-
-            listItem = recyclerView.getLayoutManager().findViewByPosition(listViewItemId);
-        } else {
-            return null;
-        }
-
-        if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, recorderActivity))
-            return  listItem;
-        else
-            return listItem.findViewById(Utils.getViewIdIntFromString(curViewId, recorderActivity));
-    }*/
-
-    public static void getViewFromParentListViewAndRun(final String curViewId, String parentListViewId, final Activity recorderActivity,
+    public static void getViewFromParentListViewAndRun(final String curViewId, String parentListViewId, final View rootView,
                                                        final int listViewItemId, final PlayerRunnable playerRunnable) {
-        View parent = recorderActivity.findViewById(Utils.getViewIdIntFromString(parentListViewId, recorderActivity));
+        View parent = rootView.findViewById(Utils.getViewIdIntFromString(parentListViewId, rootView.getContext()));
         ListView listView = parent instanceof ListView ? (ListView)parent : null;
         RecyclerView recyclerView = parent instanceof RecyclerView ? (RecyclerView)parent : null;
         if (listView != null) {
             listView.smoothScrollToPosition(listViewItemId);
             View targetView, listItem = Utils.getViewFromListViewByPosition(listViewItemId, listView);
-            if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, recorderActivity))
+            if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, rootView.getContext()))
                 targetView = listItem;
             else
-                targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, recorderActivity));
+                targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, rootView.getContext()));
 
             playerRunnable.setTargetView(targetView);
             playerRunnable.run();
         } else if (recyclerView != null){
             View targetView, listItem = recyclerView.getLayoutManager().findViewByPosition(listViewItemId);
             if (listItem != null) {
-                if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, recorderActivity))
+                if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, rootView.getContext()))
                     targetView = listItem;
                 else
-                    targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, recorderActivity));
+                    targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, rootView.getContext()));
                 playerRunnable.setTargetView(targetView);
                 playerRunnable.run();
             } else {
@@ -241,10 +218,10 @@ public class Utils {
                         View targetView, listItem;
                         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                             listItem = recyclerView.getLayoutManager().findViewByPosition(listViewItemId);
-                            if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, recorderActivity))
+                            if (listItem.getId() == Utils.getViewIdIntFromString(curViewId, rootView.getContext()))
                                 targetView = listItem;
                             else
-                                targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, recorderActivity));
+                                targetView = listItem.findViewById(Utils.getViewIdIntFromString(curViewId, rootView.getContext()));
                             playerRunnable.setTargetView(targetView);
                             playerRunnable.run();
                             recyclerView.removeOnScrollListener(this);

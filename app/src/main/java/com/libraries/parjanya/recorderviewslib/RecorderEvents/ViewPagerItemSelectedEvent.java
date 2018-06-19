@@ -37,5 +37,6 @@ public class ViewPagerItemSelectedEvent extends RecorderEvent {
     public void playEvent(Activity recorderActivity) {
         ViewPager viewPager = recorderActivity.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
         viewPager.setCurrentItem(itemId, true);
+        Utils.setCurrentViewPagerId(viewPager.getId());
     }
 }

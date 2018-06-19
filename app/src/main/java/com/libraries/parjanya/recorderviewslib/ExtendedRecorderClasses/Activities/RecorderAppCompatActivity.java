@@ -18,8 +18,14 @@ import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;
  * Created by parjanya on 4/3/18.
  */
 
-public abstract class RecorderAppCompatActivity extends AppCompatActivity {
+public abstract class RecorderAppCompatActivity extends AppCompatActivity  implements ParentActivity{
     RecorderReceiver recorderReceiver;
+    private Menu curMenu;
+
+    @Override
+    public Menu getCurMenu() {
+        return curMenu;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,8 @@ public abstract class RecorderAppCompatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Utils.setCurrentMenu(menu);
+        if (menu != null)
+            this.curMenu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

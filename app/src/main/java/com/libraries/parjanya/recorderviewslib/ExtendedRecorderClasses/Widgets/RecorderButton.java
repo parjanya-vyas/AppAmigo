@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ClickEvent;
 import com.libraries.parjanya.recorderviewslib.Constants;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.LongPressEvent;
@@ -28,13 +27,6 @@ public class RecorderButton extends AppCompatButton implements ParentRecorderVie
         xmlCreator = new XMLCreator(context);
         viewId = Utils.getViewIdStringFromView(this);
         buttonGestureDetector = new GestureDetector(context, new ButtonGestureListener());
-        /*this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                buttonGestureDetector.onTouchEvent(motionEvent);
-                return true;
-            }
-        });*/
     }
 
     @Override

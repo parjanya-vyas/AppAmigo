@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ClickEvent;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.LongPressEvent;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
@@ -24,36 +23,6 @@ public class RecorderImageView extends AppCompatImageView implements ParentRecor
         xmlCreator = new XMLCreator(context);
         viewId = Utils.getViewIdStringFromView(this);
         imageViewGestureDetector = new GestureDetector(context, new ImageViewGestureListener());
-        /*this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                imageViewGestureDetector.onTouchEvent(motionEvent);
-                return true;
-            }
-        });
-        this.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListView parentListView = Utils.getParentListView(RecorderImageView.this);
-                RecyclerView parentRecyclerView = Utils.getParentRecyclerView(RecorderImageView.this);
-                View listItemParentView = Utils.getParentListItemView(RecorderImageView.this);
-                View recyclerItemView = Utils.getParentRecyclerItemView(RecorderImageView.this);
-                int itemId = Constants.NO_LIST_VIEW;
-                String parentId = Constants.NO_ID;
-
-                if (parentListView != null) {
-                    parentId = Utils.getViewIdStringFromView(parentListView);
-                    itemId = parentListView.getPositionForView(listItemParentView);
-                }
-                else if (parentRecyclerView != null) {
-                    parentId = Utils.getViewIdStringFromView(parentRecyclerView);
-                    itemId = parentRecyclerView.getLayoutManager().getPosition(recyclerItemView);
-                }
-
-                ClickEvent clickEvent = new ClickEvent(viewId, Constants.BUTTON_EVENT_TYPE_ATTRIBUTE, parentId, itemId,  xmlCreator);
-                clickEvent.saveEvent();
-            }
-        });*/
     }
 
     @Override

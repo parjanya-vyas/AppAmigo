@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.TextChangedEvent;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
 import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;

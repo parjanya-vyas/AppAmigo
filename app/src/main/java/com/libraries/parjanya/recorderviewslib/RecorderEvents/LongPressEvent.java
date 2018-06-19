@@ -1,6 +1,8 @@
 package com.libraries.parjanya.recorderviewslib.RecorderEvents;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,11 +43,16 @@ public class LongPressEvent extends RecorderEvent {
                 targetView.performLongClick();
             }
         };
-
+        ViewPager viewPager = recorderActivity.findViewById(Utils.getCurrentViewPagerId());
+        View rootView;
+        if (viewPager != null)
+            rootView = ((Fragment)viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem())).getView();
+        else
+            rootView = recorderActivity.getWindow().getDecorView().getRootView();
         if (listViewItemId != Constants.NO_LIST_VIEW)
-            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, recorderActivity, listViewItemId, longPressRunnable);
+            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, rootView, listViewItemId, longPressRunnable);
         else {
-            View view = recorderActivity.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
+            View view = rootView.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
             longPressRunnable.setTargetView(view);
             longPressRunnable.run();
         }

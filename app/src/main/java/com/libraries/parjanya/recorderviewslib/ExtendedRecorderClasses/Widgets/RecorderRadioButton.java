@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ClickEvent;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
 import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;
@@ -23,13 +22,6 @@ public class RecorderRadioButton extends AppCompatRadioButton implements ParentR
         xmlCreator = new XMLCreator(context);
         viewId = Utils.getViewIdStringFromView(this);
         radioButtonGestureDetector = new GestureDetector(context, new RecorderRadioButton.RadioButtonGestureListener());
-        /*this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                radioButtonGestureDetector.onTouchEvent(motionEvent);
-                return true;
-            }
-        });*/
     }
     @Override
     public String getViewId() {

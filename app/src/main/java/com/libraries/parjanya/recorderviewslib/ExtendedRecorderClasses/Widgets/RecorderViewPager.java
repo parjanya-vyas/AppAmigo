@@ -5,7 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ViewPagerItemSelectedEvent;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
 import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ClickEvent;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.LongPressEvent;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
@@ -23,13 +22,6 @@ public class RecorderView extends View implements ParentRecorderView {
         xmlCreator = new XMLCreator(context);
         viewId = Utils.getViewIdStringFromView(this);
         viewGestureDetector = new GestureDetector(context, new ViewGestureListener());
-        /*this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                viewGestureDetector.onTouchEvent(motionEvent);
-                return true;
-            }
-        });*/
     }
     @Override
     public String getViewId() {

@@ -2,6 +2,9 @@ package com.libraries.parjanya.recorderviewslib.RecorderEvents;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
 import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.PlayerRunnable;
@@ -53,11 +56,17 @@ public class SpinnerItemSelectedEvent extends RecorderEvent {
                 }, Constants.PAUSE_TIME);
             }
         };
-
+        ViewPager viewPager = recorderActivity.findViewById(Utils.getCurrentViewPagerId());
+        View rootView;
+        if (viewPager != null) {
+            rootView = ((Fragment)viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem())).getView();
+        }
+        else
+            rootView = recorderActivity.getWindow().getDecorView().getRootView();
         if (listViewItemId != Constants.NO_LIST_VIEW)
-            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, recorderActivity, listViewItemId, spinnerItemSelectedRunnable);
+            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, rootView, listViewItemId, spinnerItemSelectedRunnable);
         else {
-            RecorderSpinner recorderSpinner = recorderActivity.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
+            RecorderSpinner recorderSpinner = rootView.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
             spinnerItemSelectedRunnable.setTargetView(recorderSpinner);
             spinnerItemSelectedRunnable.run();
         }

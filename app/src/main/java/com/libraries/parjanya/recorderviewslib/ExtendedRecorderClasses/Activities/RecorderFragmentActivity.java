@@ -18,8 +18,14 @@ import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;
  * Created by parjanya on 4/3/18.
  */
 
-public abstract class RecorderFragmentActivity extends FragmentActivity {
+public abstract class RecorderFragmentActivity extends FragmentActivity  implements ParentActivity{
     RecorderReceiver recorderReceiver;
+    private Menu curMenu;
+
+    @Override
+    public Menu getCurMenu() {
+        return curMenu;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +59,17 @@ public abstract class RecorderFragmentActivity extends FragmentActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        KeyPressEvent keyPressEvent = new KeyPressEvent(keyCode, Constants.KEY_EVENT_TYPE_ATTRIBUTE, new XMLCreator(this));
-        keyPressEvent.saveEvent();
+        if (Utils.isRecordingEnabled()) {
+            KeyPressEvent keyPressEvent = new KeyPressEvent(keyCode, Constants.KEY_EVENT_TYPE_ATTRIBUTE, new XMLCreator(this));
+            keyPressEvent.saveEvent();
+        }
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Utils.setCurrentMenu(menu);
+        if (menu != null)
+            this.curMenu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

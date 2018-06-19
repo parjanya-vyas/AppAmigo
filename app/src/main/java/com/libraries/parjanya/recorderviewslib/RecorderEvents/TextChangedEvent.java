@@ -1,6 +1,8 @@
 package com.libraries.parjanya.recorderviewslib.RecorderEvents;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -45,11 +47,16 @@ public class TextChangedEvent extends RecorderEvent {
                 editableText.setText(changedText);
             }
         };
-
+        ViewPager viewPager = recorderActivity.findViewById(Utils.getCurrentViewPagerId());
+        View rootView;
+        if (viewPager != null)
+            rootView = ((Fragment)viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem())).getView();
+        else
+            rootView = recorderActivity.getWindow().getDecorView().getRootView();
         if (listViewItemId != Constants.NO_LIST_VIEW)
-            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, recorderActivity, listViewItemId, editTextRunnable);
+            Utils.getViewFromParentListViewAndRun(viewId, parentListViewId, rootView, listViewItemId, editTextRunnable);
         else {
-            View editableTextView = recorderActivity.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
+            View editableTextView = rootView.findViewById(Utils.getViewIdIntFromString(viewId, recorderActivity));
             editTextRunnable.setTargetView(editableTextView);
             editTextRunnable.run();
         }

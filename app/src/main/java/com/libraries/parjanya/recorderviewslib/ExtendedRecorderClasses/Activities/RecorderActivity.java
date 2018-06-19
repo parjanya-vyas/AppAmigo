@@ -14,8 +14,18 @@ import com.libraries.parjanya.recorderviewslib.RecorderReceiver;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
 import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;
 
-public class RecorderActivity extends Activity {
+/**
+ * Created by parjanya on 4/3/18.
+ */
+
+public abstract class RecorderActivity extends Activity implements ParentActivity{
     RecorderReceiver recorderReceiver;
+    private Menu curMenu;
+
+    @Override
+    public Menu getCurMenu() {
+        return curMenu;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class RecorderActivity extends Activity {
         super.onStart();
         Utils.initializeNotifications(this, true);
         registerReceiver(recorderReceiver, Utils.getIntentFilterForAllActions());
+        Utils.setCurrentActivity(this);
         if (Utils.isRecordingEnabled())
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -57,7 +68,8 @@ public class RecorderActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Utils.setCurrentMenu(menu);
+        if (menu != null)
+            this.curMenu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

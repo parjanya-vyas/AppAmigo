@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
-import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.ParentRecorderView;
 import com.libraries.parjanya.recorderviewslib.RecorderEvents.ClickEvent;
 import com.libraries.parjanya.recorderviewslib.Constants;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
@@ -26,18 +25,18 @@ public class RecorderCheckBox extends AppCompatCheckBox implements ParentRecorde
         xmlCreator = new XMLCreator(context);
         viewId = Utils.getViewIdStringFromView(this);
         checkBoxGestureDetector = new GestureDetector(context, new RecorderCheckBox.CheckBoxGestureListener());
-        /*this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                checkBoxGestureDetector.onTouchEvent(motionEvent);
-                return true;
-            }
-        });*/
     }
     @Override
     public String getViewId() {
         return viewId;
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        checkBoxGestureDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
+    }
+
     public RecorderCheckBox(Context context) {
         super(context);
         init(context);

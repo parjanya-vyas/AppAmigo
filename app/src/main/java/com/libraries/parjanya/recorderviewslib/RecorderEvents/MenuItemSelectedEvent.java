@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import com.libraries.parjanya.recorderviewslib.Constants;
+import com.libraries.parjanya.recorderviewslib.ExtendedRecorderClasses.Activities.ParentActivity;
 import com.libraries.parjanya.recorderviewslib.Utils.NetworkUtils;
 import com.libraries.parjanya.recorderviewslib.Utils.Utils;
 import com.libraries.parjanya.recorderviewslib.XMLHandler.XMLCreator;
@@ -32,19 +33,7 @@ public class MenuItemSelectedEvent extends RecorderEvent {
 
     @Override
     public void playEvent(final Activity recorderActivity) {
-        Handler handler = new Handler();
         final int integerItemId = Utils.getViewIdIntFromString(itemId, recorderActivity);
-        if (recorderActivity instanceof AppCompatActivity) {
-            recorderActivity.openOptionsMenu();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    recorderActivity.closeOptionsMenu();
-                    recorderActivity.onOptionsItemSelected(Utils.getCurrentMenu().findItem(integerItemId));
-                }
-            }, Constants.PAUSE_TIME);
-        } else {
-            recorderActivity.onOptionsItemSelected(Utils.getCurrentMenu().findItem(integerItemId));
-        }
+        recorderActivity.onOptionsItemSelected(((ParentActivity)recorderActivity).getCurMenu().findItem(integerItemId));
     }
 }
